@@ -65,7 +65,7 @@ async def convert(update,context):
             formated_data2 = await format_binance_response_data(resp_data2)
             parallel_buy1 = formated_data1["buy_rate"]
             parallel_buy2 = formated_data2["buy_rate"]
-            final_result = float(parallel_buy2) / float(parallel_buy1)
+            final_result = round(float(parallel_buy2) / float(parallel_buy1),7)
             reply = f"1 {from_currency} to {to_currency} is {final_result}"
             update.message.reply_text(reply)
         
@@ -85,7 +85,7 @@ async def calculate(update,context):
             formated_data2 = await format_binance_response_data(resp_data2)
             parallel_buy1 = formated_data1["buy_rate"]
             parallel_buy2 = formated_data2["buy_rate"]
-            final_result = float(parallel_buy2) / float(parallel_buy1) * amount
+            final_result = round(float(parallel_buy2) / float(parallel_buy1),6) * amount
             reply = f"{amount} {from_currency} to {to_currency} is {final_result}"
             update.message.reply_text(reply)
 
