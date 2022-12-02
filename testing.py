@@ -69,7 +69,7 @@ async def convert(update,context):
 async def calculate(update,context):
     if len(context.args) < 3:
         update.message.reply_text("Enter in the format e.g USD NGN 100")
-        break
+        continue
     from_currency = "".join(context.args[0]).upper()
     to_currency = "".join(context.args[1]).upper()
     amount = float(context.args[2])
