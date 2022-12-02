@@ -1,1 +1,1 @@
-web street_rates_telegram_bot\testing.py
+web street_rates_telegram_bot/testing.py
