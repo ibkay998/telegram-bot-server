@@ -75,8 +75,7 @@ async def calculate(update,context):
         amount = float(context.args[2])
         if from_currency not in iso_code_list and to_currency not in iso_code_list:
             update.message.reply_text("One of this isocodes does not have a black market rate")
-        else:
-            update.message.reply_text(f"Enter the amount of {from_currency}")       
+        else:     
             resp_data1 = await get_binancep2p_rate(from_currency)
             formated_data1 = await format_binance_response_data(resp_data1)
             resp_data2 = await get_binancep2p_rate(to_currency)
