@@ -28,8 +28,7 @@ def help(update,context):
 e.g /convert USD NGN
 /list -> Lists all the avalable iso_cades the bot can get rates for
 /calculate -> Calculate the actual amount of any available currency to another put the from and to currency.
-e.g /calculate USD NGN 
-then you type in the amount you want
+e.g /calculate USD NGN Amount
 """
     )
 
@@ -83,7 +82,7 @@ async def calculate(update,context):
             parallel_buy1 = formated_data1["buy_rate"]
             parallel_buy2 = formated_data2["buy_rate"]
             final_result = round(float(parallel_buy2) / float(parallel_buy1),2) * amount
-            reply = f"{value} {from_currency} to {to_currency} is {final_result}"
+            reply = f"{amount} {from_currency} to {to_currency} is {final_result}"
             update.message.reply_text(reply)
 
 def loop_runner(action):
