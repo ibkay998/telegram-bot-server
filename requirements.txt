@@ -1,6 +1,5 @@
 aiohttp
 asyncio
-python
 pydantic
 requests
 typing_extensions
