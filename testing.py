@@ -24,9 +24,10 @@ def help(update,context):
 /start -> Welcome to the channel
 /help -> View all the Commands
 /usd -> You type in the isocode of the currency and it returns the black market rate of the currency
+e.g/usd NGN
 /convert -> You type in the isocode of the currency you want to convert then the isocode of the currency you want to convert to.
 e.g /convert USD NGN
-/list -> Lists all the avalable iso_cades the bot can get rates for
+/list -> Lists all the avalable iso_codes the bot can get rates for
 /calculate -> Calculate the actual amount of any available currency to another put the from and to currency.
 e.g /calculate USD NGN Amount
 """
