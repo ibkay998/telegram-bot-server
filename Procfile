@@ -1,1 +1,1 @@
-web: sh -c 'cd ./street_rates_telegram_bot/ && python testing.py'
+web: sh -c 'python /street_rates_telegram_bot/testing.py'
