@@ -1,3 +1,4 @@
+import os
 import telegram.ext
 import requests
 from app.utils import get_binancep2p_rate, format_binance_response_data
@@ -5,7 +6,7 @@ import asyncio
 
 
 
-Token = "5640574571:AAFS6NqaeEiv7w1sWLpPu7f--v2rtNnAzcE"
+Token = os.getenv(TELEGRAM_API_KEY)
 
 updater = telegram.ext.Updater(Token,use_context=True)
 dispatcher = updater.dispatcher
