@@ -76,13 +76,14 @@ async def calculate(update,context):
     else:
         update.message.reply_text(f"Enter the amount of {from_currency}")
         value = update.message.text
+        print(value)
         resp_data1 = await get_binancep2p_rate(from_currency)
         formated_data1 = await format_binance_response_data(resp_data1)
         resp_data2 = await get_binancep2p_rate(to_currency)
         formated_data2 = await format_binance_response_data(resp_data2)
         parallel_buy1 = formated_data1["buy_rate"]
         parallel_buy2 = formated_data2["buy_rate"]
-        final_result = round(float(parallel_buy2) / float(parallel_buy1),2) * value
+        final_result = round(float(parallel_buy2) / float(parallel_buy1),2) * float(value)
         reply = f"{value} {from_currency} to {to_currency} is {final_result}"
         update.message.reply_text(reply)
 
