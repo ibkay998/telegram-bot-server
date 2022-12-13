@@ -7,7 +7,7 @@ import asyncio
 
 
 Token = os.getenv("TELEGRAM_API_KEY")
-endpoint_base=""
+endpoint_base = "https://api.streetrates.hng.tech/api/currency/currency/"
 endpoint_list="https://api.streetrates.hng.tech/api/currency/currencies/flag"
 updater = telegram.ext.Updater(Token,use_context=True)
 dispatcher = updater.dispatcher
@@ -42,7 +42,7 @@ def list(update,context):
         country = item["country"]
         isocode = item["isocode"]
         reply = f"{isocode} -> {country}"
-        update.message.reply_text(isocode)
+        update.message.reply_text(reply)
         
 
 
@@ -51,10 +51,15 @@ async def usd(update,context):
     if value not in iso_code_list:
         update.message.reply_text("This isocode does not have a black market rate")
     else:
-        resp_data = await get_binancep2p_rate(value)
-        formated_data = await format_binance_response_data(resp_data)
-        parallel_buy = formated_data["buy_rate"]
-        reply = f"1 {value} to USD is {parallel_buy}"
+        url = f"{endpoint_base}{value}"
+        response = requests.get(url)
+        data = response.json()
+        name = data["data"]["name"]
+        if data["success"]:
+            sell = data["data"]["rate"]["parallel_sell"]
+            reply=f"One USD to {first} is {sell} {name}"
+        else:
+            reply = "request failed"
         update.message.reply_text(reply)
 
 async def convert(update,context):
