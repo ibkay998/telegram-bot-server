@@ -71,14 +71,21 @@ async def convert(update,context):
         if from_currency not in iso_code_list and to_currency not in iso_code_list:
             update.message.reply_text("One of this isocodes does not have a black market rate")
         else:
-            resp_data1 = await get_binancep2p_rate(from_currency)
-            formated_data1 = await format_binance_response_data(resp_data1)
-            resp_data2 = await get_binancep2p_rate(to_currency)
-            formated_data2 = await format_binance_response_data(resp_data2)
-            parallel_buy1 = formated_data1["buy_rate"]
-            parallel_buy2 = formated_data2["buy_rate"]
-            final_result = round(float(parallel_buy2) / float(parallel_buy1),7)
-            reply = f"1 {from_currency} to {to_currency} is {final_result}"
+            url1 = f"{endpoint_base}{from_currency}"
+            response1 = requests.get(url1)
+            url2 = f"{endpoint_base}{to_currency}"
+            response2 = requests.get(url2)
+            data1 = response1.json()
+            name1 = data["data"]["name"]
+            data2 = response2.json()
+            name2 = data2["data"]["name"]
+            if data1["success"] and data2["success"]:
+                sell1 = data1["data"]["rate"]["parallel_sell"]
+                sell2 = data2["data"]["rate"]["parallel_sell"]
+            else:
+                print("request failed")
+            final_result = round(float(sell2) / float(sell1),3)
+            reply=f"One {from_currency} to {to_currency} is {final_result} {name}"
             update.message.reply_text(reply)
         
 async def calculate(update,context):
@@ -97,7 +104,7 @@ async def calculate(update,context):
             formated_data2 = await format_binance_response_data(resp_data2)
             parallel_buy1 = formated_data1["buy_rate"]
             parallel_buy2 = formated_data2["buy_rate"]
-            final_result = round(float(parallel_buy2) / float(parallel_buy1),6) * amount
+            final_result = round(float(parallel_buy2) / float(parallel_buy1),3) * amount
             reply = f"{amount} {from_currency} to {to_currency} is {final_result}"
             update.message.reply_text(reply)
 
