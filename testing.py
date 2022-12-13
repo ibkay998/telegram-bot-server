@@ -43,7 +43,8 @@ def list(update,context):
     for item in data:
         country = item["country"]
         isocode = item["isocode"]
-        reply = f"{isocode} -> {country}"
+        name = item["name"]
+        reply = f"{isocode} -> {country} ({name})"
         update.message.reply_text(reply)
         
 
