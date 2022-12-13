@@ -76,7 +76,7 @@ async def convert(update,context):
             url2 = f"{endpoint_base}{to_currency}"
             response2 = requests.get(url2)
             data1 = response1.json()
-            name1 = data["data"]["name"]
+            name1 = data1["data"]["name"]
             data2 = response2.json()
             name2 = data2["data"]["name"]
             if data1["success"] and data2["success"]:
