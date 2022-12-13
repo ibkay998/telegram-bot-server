@@ -7,7 +7,8 @@ import asyncio
 
 
 Token = os.getenv("TELEGRAM_API_KEY")
-
+endpoint_base=""
+endpoint_list="https://api.streetrates.hng.tech/api/currency/currencies/flag"
 updater = telegram.ext.Updater(Token,use_context=True)
 dispatcher = updater.dispatcher
 iso_code_list = set(("ARS","EUR","USD","AED","AUD","BDT","BHD","BOB","BRL","CAD","CLP","CNY","COP","CRC","CZK","DOP","DZD","EGP","GBP","GEL","GHS","HKD","IDR","INR","JPY","KES","KHR","KRW","KWD","KZT","LAK","LBP","LKR","MAD","MMK","MXN","MYR","NGN","OMR","PAB","PEN","PHP","PKR","PLN","PYG","QAR","RON","RUB","SAR","SDG","SEK","SGD","THB","TND","TRY","TWD","UAH","UGX","UYU","VES","VND","ZAR"))
@@ -34,8 +35,14 @@ e.g /calculate USD NGN Amount
     )
 
 def list(update,context):
-    for iso_code in iso_code_list:
-        update.message.reply_text(iso_code)
+    url = f{endpoint_list}
+    response = requests.get(url)
+    data = response.json()
+    for item in data:
+        country = item["country"]
+        isocode = item["isocode"]
+        reply = f"{isocode} -> {country}"
+        update.message.reply_text(isocode)
         
 
 
