@@ -85,7 +85,7 @@ async def convert(update,context):
             else:
                 print("request failed")
             final_result = round(float(sell2) / float(sell1),3)
-            reply=f"One {from_currency} to {to_currency} is {final_result} {name}"
+            reply=f"One {from_currency} to {to_currency} is {final_result} {name2}"
             update.message.reply_text(reply)
         
 async def calculate(update,context):
