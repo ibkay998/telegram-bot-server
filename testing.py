@@ -57,7 +57,7 @@ async def usd(update,context):
         name = data["data"]["name"]
         if data["success"]:
             sell = data["data"]["rate"]["parallel_sell"]
-            reply=f"One USD to {first} is {sell} {name}"
+            reply=f"One USD to {value} is {sell} {name}"
         else:
             reply = "request failed"
         update.message.reply_text(reply)
