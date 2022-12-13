@@ -35,7 +35,7 @@ e.g /calculate USD NGN Amount
     )
 
 def list(update,context):
-    url = f{endpoint_list}
+    url = f"{endpoint_list}"
     response = requests.get(url)
     data = response.json()
     for item in data:
